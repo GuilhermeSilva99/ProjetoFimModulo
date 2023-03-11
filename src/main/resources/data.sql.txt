@@ -1,0 +1,1 @@
+INSERT INTO tb_veiculo(placa, marca, modelo, tipo, disponivel) values ('RZO2e21', 'honda', 'XRE300', 'moto', true );

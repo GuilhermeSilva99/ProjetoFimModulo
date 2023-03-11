@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout (~{:: main})}">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<main>
+<form th:action="${add} ? @{/aluguel/add} : @{/aluguel/{aluguelId}/edit(aluguelId=${aluguel.id})}"
+      th:object="${aluguel}" th:method="${add} ? POST : PUT">
+    <div class="container">
+        <h1 th:text="${add} ? 'Cadastrar Aluguel' : 'Editar Aluguel'"></h1>
+        <div th:if="${aluguel.id}" class="mb-3 row">
+            <label for="inputId" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-3">
+                <input type="text" th:readonly="${add} ? 'false' : 'true'" th:field="${aluguel.id}" class="form-control" id="inputId">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="inputNome" class="col-sm-2 col-form-label">Nome da Pessoa</label>
+            <div class="col-sm-3">
+                <input type="text" th:readonly="${add} ? 'false' : 'true'" th:field="*{nomePessoa}" class="form-control" id="inputNome">
+                <ul>
+                    <li th:each="erro : ${#fields.errors('nomePessoa')}" th:text="${erro}" />
+                </ul>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="inputPlaca" class="col-sm-2 col-form-label">Placa</label>
+            <div class="col-sm-3">
+                <input type="text" th:readonly="${add} ? 'false' : 'true'" th:field="*{placa}" class="form-control" id="inputPlaca">
+                <ul>
+                    <li th:each="erro : ${#fields.errors('placa')}" th:text="${erro}" />
+                </ul>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="inputLocal" class="col-sm-2 col-form-label">Local de aluguel</label>
+            <div class="col-sm-3">
+                <input type="text" th:readonly="${add} ? 'false' : 'true'" th:field="*{local}" class="form-control" id="inputLocal">
+                <ul>
+                    <li th:each="erro : ${#fields.errors('local')}" th:text="${erro}" />
+                </ul>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="inputDataInicio" class="col-sm-2 col-form-label">Data Início</label>
+            <div class="col-sm-3">
+                <input type="datetime-local" th:field="*{inicioDoAluguel}" class="form-control" id="inputDataInicio">
+                <ul>
+                    <li th:each="erro : ${#fields.errors('inicioDoAluguel')}" th:text="${erro}" />
+                </ul>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="inputDataFim" class="col-sm-2 col-form-label">Data Fim</label>
+            <div class="col-sm-3">
+                <input type="datetime-local" th:field="*{fimDoAluguel}" class="form-control" id="inputDataFim">
+                <ul>
+                    <li th:each="erro : ${#fields.errors('fimDoAluguel')}" th:text="${erro}" />
+                </ul>
+            </div>
+        </div>
+        <input type="submit" value="Salvar" class="btn btn-primary mb-3"/>
+        <br/><br/>
+        <a th:href="@{/alugueis}">Voltar</a>
+    </div>
+</form>
+<br/>
+</main>
+</body>
+</html>
